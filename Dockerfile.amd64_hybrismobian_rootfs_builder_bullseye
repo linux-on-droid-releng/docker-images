@@ -1,0 +1,24 @@
+# Pull latest Debian bullseye
+FROM debian:bullseye
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NOWARNINGS yes
+ENV DEBIAN_PRIORITY critical
+
+# Required for https repositories
+RUN apt-get update && apt-get install --yes ca-certificates
+
+# Copy relevant repositories and keyrings
+# Note: .dummy files used to keep the directory hierarchy in git are
+# copied too, see moby/moby#26332
+COPY repositories/all/* /etc/apt/sources.list.d/
+COPY repositories/amd64/* /etc/apt/sources.list.d/
+
+COPY keyrings/all/* /etc/apt/hybris-mobian-gpg.d/
+COPY keyrings/amd64/* /etc/apt/hybris-mobian-gpg.d/
+
+COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
+
+# Update and install
+RUN apt-get update && apt-get install -y \
+ debos
