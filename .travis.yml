@@ -55,6 +55,17 @@ jobs:
     group: edge # required to route the job to arm64-graviton2
     <<: *docker_build_template
 
+  # AMD64 (x86_64) image containing rootfs build tools
+  - name: amd64/hybrismobian/rootfs-builder:bullseye
+    arch: amd64
+    <<: *docker_build_template
+  # ARM64 (AArch64) image containing rootfs build tools
+  - name: arm64/hybrismobian/rootfs-builder:bullseye
+    arch: arm64-graviton2
+    virt: vm # required to route the job to arm64-graviton2
+    group: edge # required to route the job to arm64-graviton2
+    <<: *docker_build_template
+
   #################################################################
   - name: manifest-build
     <<: *manifest_build
