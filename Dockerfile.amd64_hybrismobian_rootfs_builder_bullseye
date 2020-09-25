@@ -21,4 +21,5 @@ COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 
 # Update and install
 RUN apt-get update && apt-get install -y \
- debos
+ debos \
+ systemd-container
