@@ -23,4 +23,8 @@ COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 RUN apt-get update && apt-get install -y \
  build-essential \
  devscripts \
- equivs
+ equivs \
+ wget
+
+# FIXME: Install releng-tools manually until the new infra is up
+RUN wget https://github.com/hybris-mobian-releng/releng-tools/releases/download/hybris-mobian%2Fbullseye%2F5/releng-tools_5+git20201001234056.68ab940.bullseye.production_all.deb -O /tmp/releng-tools.deb && dpkg -i /tmp/releng-tools.deb ; apt-get -fy install
