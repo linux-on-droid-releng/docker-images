@@ -27,4 +27,16 @@ _sanitized=${_sanitized////_}
 
 ARCH=$(echo "${IMAGE}" | cut -d"/" -f1)
 
-docker build -f "./Dockerfile.${_sanitized}" -t "${IMAGE}" .
+case "${ARCH}" in
+	"arm64")
+		_DOCKER_ARCH="arm64v8"
+		;;
+	"armhf")
+		_DOCKER_ARCH="arm32v7"
+		;;
+	*)
+		_DOCKER_ARCH="${ARCH}"
+		;;
+esac
+
+docker build -f "./Dockerfile.${_sanitized}" -t "${IMAGE}" --build-arg ARCH="${_DOCKER_ARCH}" .
