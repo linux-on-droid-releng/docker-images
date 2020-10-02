@@ -1,6 +1,6 @@
-# Pull latest Debian %(tag)s
+# Pull latest Debian bullseye
 ARG ARCH=
-FROM ${ARCH}/debian:%(tag)s
+FROM ${ARCH}/debian:bullseye
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NOWARNINGS yes
@@ -13,10 +13,10 @@ RUN apt-get update && apt-get install --yes ca-certificates
 # Note: .dummy files used to keep the directory hierarchy in git are
 # copied too, see moby/moby#26332
 COPY repositories/all/* /etc/apt/sources.list.d/
-COPY repositories/%(arch)s/* /etc/apt/sources.list.d/
+COPY repositories/armhf/* /etc/apt/sources.list.d/
 
 COPY keyrings/all/* /etc/apt/hybris-mobian-gpg.d/
-COPY keyrings/%(arch)s/* /etc/apt/hybris-mobian-gpg.d/
+COPY keyrings/armhf/* /etc/apt/hybris-mobian-gpg.d/
 
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 
@@ -28,4 +28,4 @@ RUN apt-get update && apt-get install -y \
  wget
 
 # FIXME: Install releng-tools manually until the new infra is up
-RUN wget https://github.com/hybris-mobian-releng/releng-tools/releases/download/hybris-mobian%%2Fbullseye%%2F5/releng-tools_5+git20201001234056.68ab940.bullseye.production_all.deb -O /tmp/releng-tools.deb && dpkg -i /tmp/releng-tools.deb ; apt-get -fy install
+RUN wget https://github.com/hybris-mobian-releng/releng-tools/releases/download/hybris-mobian%2Fbullseye%2F5/releng-tools_5+git20201001234056.68ab940.bullseye.production_all.deb -O /tmp/releng-tools.deb && dpkg -i /tmp/releng-tools.deb ; apt-get -fy install

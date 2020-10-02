@@ -1,5 +1,6 @@
 # Pull latest Debian %(tag)s
-FROM debian:%(tag)s
+ARG ARCH=
+FROM ${ARCH}/debian:%(tag)s
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NOWARNINGS yes

@@ -1,5 +1,6 @@
 # Pull latest Debian bullseye
-FROM debian:bullseye
+ARG ARCH=
+FROM ${ARCH}/debian:bullseye
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NOWARNINGS yes
