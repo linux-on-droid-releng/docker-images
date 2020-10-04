@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y \
  wget
 
 # FIXME: Install aptly-intake manually until the new infra is up
-RUN wget https://github.com/hybris-mobian-releng/aptly-intake/releases/download/hybris-mobian%2Fbullseye%2F2/aptly-intake_2+git20201004002357.3f200f6.bullseye.production_all.deb -O /tmp/aptly-intake.deb && dpkg -i /tmp/aptly-intake.deb ; apt-get -fy install
+RUN wget https://github.com/hybris-mobian-releng/aptly-intake/releases/download/hybris-mobian%2Fbullseye%2F3/aptly-intake_3+git20201004230019.688af5e.bullseye.production_all.deb -O /tmp/aptly-intake.deb && dpkg -i /tmp/aptly-intake.deb ; apt-get -fy install
 
 # Systemd configuration:
 # Credits to Alexander Haase <ahaase@alexhaase.de>
