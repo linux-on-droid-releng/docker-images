@@ -101,6 +101,11 @@ jobs:
 #    group: edge # required to route the job to arm64-graviton2
 #    <<: *docker_build_template
 
+  # AMD64 (x86_64) image containing tools for repository management
+  - name: amd64/hybrismobian/aptly-intake:bullseye
+    arch: amd64
+    <<: *docker_build_template
+
   #################################################################
   - name: manifest-build
     <<: *manifest_build
