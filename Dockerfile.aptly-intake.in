@@ -9,6 +9,17 @@ ENV DEBIAN_PRIORITY critical
 # Required for https repositories
 RUN apt-get update && apt-get install --yes ca-certificates
 
+# Pre-create users and groups. We are going to remap them anyway
+# at runtime by looking at permissions of the bind-mounted directories
+# but at least we already know which ids to change
+RUN adduser --system --home /var/lib/aptly-api --no-create-home --uid 10100 aptly-api && \
+ addgroup --gid 10100 aptly-api && \
+ adduser aptly-api aptly-api && \
+ adduser --system --home /srv/aptly-queue --no-create-home --uid 10101 aptly-queue && \
+ addgroup --gid 10101 aptly-queue && \
+ adduser aptly-queue aptly-queue && \
+ adduser aptly-api aptly-queue
+
 # Update and install
 RUN apt-get update && apt-get install -y \
  systemd \
