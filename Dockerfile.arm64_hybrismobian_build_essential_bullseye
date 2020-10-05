@@ -20,6 +20,9 @@ COPY keyrings/arm64/* /etc/apt/hybris-mobian-gpg.d/
 
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 
+# Copy deployer for repo.hybris-mobian.org
+COPY extra/repo-hybris-mobian-deploy.sh /usr/local/bin
+
 # Update and install
 RUN apt-get update && apt-get install -y \
  build-essential \
