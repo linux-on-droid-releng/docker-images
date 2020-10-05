@@ -28,7 +28,9 @@ RUN apt-get update && apt-get install -y \
  build-essential \
  devscripts \
  equivs \
- wget
+ wget \
+ openssh-client \
+ rsync
 
 # FIXME: Install releng-tools manually until the new infra is up
 RUN wget https://github.com/hybris-mobian-releng/releng-tools/releases/download/hybris-mobian%2Fbullseye%2F6/releng-tools_6+git20201002213810.564c4e5.bullseye.production_all.deb -O /tmp/releng-tools.deb && dpkg -i /tmp/releng-tools.deb ; apt-get -fy install
