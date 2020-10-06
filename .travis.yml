@@ -94,12 +94,14 @@ jobs:
     virt: vm # required to route the job to arm64-graviton2
     group: edge # required to route the job to arm64-graviton2
     <<: *docker_build_template
-#  # ARMHF (armv7hf) image containing rootfs build tools
-#  - name: armhf/hybrismobian/rootfs-builder:bullseye
-#    arch: arm64-graviton2
-#    virt: vm # required to route the job to arm64-graviton2
-#    group: edge # required to route the job to arm64-graviton2
-#    <<: *docker_build_template
+  # ARMHF (armv7hf) image containing rootfs build tools
+  - name: armhf/hybrismobian/rootfs-builder:bullseye
+    arch: arm64-graviton2
+    virt: vm # required to route the job to arm64-graviton2
+    group: edge # required to route the job to arm64-graviton2
+    env:
+      - DOCKER_UPDATE="yes"
+    <<: *docker_build_template
 
   # AMD64 (x86_64) image containing tools for repository management
   - name: amd64/hybrismobian/aptly-intake:bullseye
