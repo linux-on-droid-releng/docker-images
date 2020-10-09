@@ -24,7 +24,8 @@ COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 RUN apt-get update && apt-get install -y \
  debos \
  dpkg-dev \
- systemd-container
+ systemd-container \
+ hybris-mobian-apt-config
 
 # Systemd configuration:
 # Credits to Alexander Haase <ahaase@alexhaase.de>
