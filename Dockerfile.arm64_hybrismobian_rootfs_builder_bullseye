@@ -25,6 +25,10 @@ RUN apt-get update && apt-get install -y \
  hybris-mobian-apt-config && apt-get install -y \
  debos \
  dpkg-dev \
+ parted \
+ dosfstools \
+ udev \
+ bmap-tools \
  systemd-container
 
 # Systemd configuration:
