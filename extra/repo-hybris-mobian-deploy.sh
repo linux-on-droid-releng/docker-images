@@ -3,9 +3,25 @@
 # Quick and dirty deployer
 #
 
-if [ "${HAS_JOSH_K_SEAL_OF_APPROVAL}" != "true" ]; then
+if [ "${HAS_JOSH_K_SEAL_OF_APPROVAL}" == "true" ]; then
+	# Travis CI
+
+	BRANCH="${TRAVIS_BRANCH}"
+	COMMIT="${TRAVIS_COMMIT}"
+	if [ -n "${TRAVIS_TAG}" ]; then
+		TAG="${TRAVIS_TAG}"
+	fi
+elif [ "${DRONE}" == "true" ]; then
+	# Drone CI
+
+	BRANCH="${DRONE_BRANCH}"
+	COMMIT="${DRONE_COMMIT}"
+	if [ -n "${DRONE_TAG}" ]; then
+		TAG="${DRONE_TAG}"
+	fi
+else
 	# Sorry
-	echo "This script runs only on Travis CI!"
+	echo "This script runs only on Travis CI or Drone CI!"
 	exit 1
 fi
 
@@ -28,10 +44,10 @@ EOF
 
 # Determine target.
 echo "Determining target"
-if [ -n "${TRAVIS_TAG}" ]; then
+if [ -n "${TAG}" ]; then
 	# Tag, should go to production
 	TARGET="production"
-elif [[ ${TRAVIS_BRANCH} = feature/* ]]; then
+elif [[ ${BRANCH} = feature/* ]]; then
 	# Feature branch
 	_project=${TRAVIS_REPO_SLUG//\//-}
 	_project=${_project//_/-}
