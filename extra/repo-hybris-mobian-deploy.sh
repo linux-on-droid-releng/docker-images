@@ -8,6 +8,7 @@ if [ "${HAS_JOSH_K_SEAL_OF_APPROVAL}" == "true" ]; then
 
 	BRANCH="${TRAVIS_BRANCH}"
 	COMMIT="${TRAVIS_COMMIT}"
+	PROJECT_SLUG="${TRAVIS_REPO_SLUG}"
 	if [ -n "${TRAVIS_TAG}" ]; then
 		TAG="${TRAVIS_TAG}"
 	fi
@@ -16,6 +17,7 @@ elif [ "${DRONE}" == "true" ]; then
 
 	BRANCH="${DRONE_BRANCH}"
 	COMMIT="${DRONE_COMMIT}"
+	PROJECT_SLUG="${DRONE_REPO}"
 	if [ -n "${DRONE_TAG}" ]; then
 		TAG="${DRONE_TAG}"
 	fi
@@ -49,9 +51,9 @@ if [ -n "${TAG}" ]; then
 	TARGET="production"
 elif [[ ${BRANCH} = feature/* ]]; then
 	# Feature branch
-	_project=${TRAVIS_REPO_SLUG//\//-}
+	_project=${PROJECT_SLUG//\//-}
 	_project=${_project//_/-}
-	_branch=${TRAVIS_BRANCH/feature\//}
+	_branch=${BRANCH/feature\//}
 	_branch=${_branch//./-}
 	_branch=${_branch//_/-}
 	_branch=${_branch//\//-}
