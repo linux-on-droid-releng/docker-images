@@ -108,6 +108,6 @@ jobs:
     arch: amd64
     <<: *docker_build_template
 
-  #################################################################
-  - name: manifest-build
-    <<: *manifest_build
+#  #################################################################
+#  - name: manifest-build
+#    <<: *manifest_build
