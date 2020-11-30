@@ -22,8 +22,8 @@ info "Pushing ${IMAGE}"
 
 # Extract arch
 ARCH=$(echo "${IMAGE}" | cut -d"/" -f1)
-TARGET_TAG=docker.io/${IMAGE/"${ARCH}/"/""}-"${ARCH}"
+TARGET_TAG=quay.io/${IMAGE/"${ARCH}/"/""}-"${ARCH}"
 
-echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin docker.io
+echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin quay.io
 docker tag "${IMAGE}" "${TARGET_TAG}"
 docker push "${TARGET_TAG}"

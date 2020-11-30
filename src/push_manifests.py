@@ -56,7 +56,7 @@ with open(YAML_FILE, "r") as f:
 			"-u",
 			os.environ["DOCKER_USERNAME"],
 			"--password-stdin",
-			"docker.io"
+			"quay.io"
 		],
 		input=os.environ["DOCKER_PASSWORD"],
 		check=True,
@@ -84,7 +84,7 @@ with open(YAML_FILE, "r") as f:
 				"manifest",
 				"push",
 				"--purge",
-				alias
+				"%s/%s" % ("quay.io", alias)
 			],
 			check=True,
 			env=subprocess_env
