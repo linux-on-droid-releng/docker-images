@@ -34,4 +34,4 @@ RUN apt-get update && apt-get install -y \
  rsync \
  releng-tools \
  hybris-mobian-apt-config \
- hybris-mobian-archive-keyring
+ hybris-mobian-archive-keyring && apt-get dist-upgrade -y --allow-downgrades
