@@ -7,11 +7,10 @@ import os
 
 from collections import namedtuple
 
-YAML_FILE = "./.travis.yml"
+YAML_FILE = "./.github/workflows/docker-images.yml"
 DOCKERFILE_PATH = "./Dockerfile.%s.in"
 DOCKERFILE_TARGET = "./Dockerfile.%(target_name)s"
 
-Target = namedtuple("Target", ["arch", "namespae", "template", "tag"])
 
 if __name__ != "__main__":
 	raise Exception("You shouldn't import this script")
@@ -24,22 +23,48 @@ with open(YAML_FILE, "r") as f:
 
 	templates_mapping = {}
 
-	for job in content.get("jobs", {}).get("include", []):
-		if job.get("stage", None) != "docker":
+	matrix_block = content.get("jobs", {"build" : {}})["build"].get("strategy", {"matrix": []})["matrix"]
+	exclude = matrix_block.pop("exclude")
+	if not matrix_block:
+		raise Exception("No matrix block found")
+
+	matrix = [{}]
+	for item, content in matrix_block.items():
+		_matrix = []
+		for matrix_item in matrix:
+			for content_item in content:
+				_matrix.append({**matrix_item, **{item: content_item}})
+
+		matrix = _matrix
+
+	# Parse exclusions
+	excluded = []
+	for job in matrix:
+		for excluded_block in exclude:
+			matched = [job[x] == y for x, y in excluded_block.items()]
+			if not False in matched:
+				excluded.append(job)
+
+	print("The following jobs are excluded: %s" % excluded)
+
+	for job in matrix:
+		if job in excluded:
 			continue
 
-		target_name, arch, namespace, template, tag = [
-			job["name"].replace("/", "_").replace(":", "_").replace(".", "_").replace("-","_"),
-			*job["name"].replace(":", "/").split("/")
-		]
+		target_name = ("%s_%s_%s_%s" % (
+			job["arch"],
+			job["namespace"],
+			job["template"],
+			job["dist"],
+		)).replace("/", "_").replace(":", "_").replace(".", "_").replace("-","_")
 
-		templates_mapping.setdefault(template, []).append(
+		templates_mapping.setdefault(job["template"], []).append(
 			{
 				"target_name" : target_name,
-				"arch" : arch,
-				"namespace" : namespace,
-				"template" : template,
-				"tag" : tag
+				"arch" : job["arch"],
+				"namespace" : job["namespace"],
+				"template" : job["template"],
+				"tag" : job["dist"],
 			}
 		)
 

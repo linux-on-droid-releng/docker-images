@@ -1,0 +1,49 @@
+# hybris-mobian docker images build definition for GitHub Actions
+# Contact: Eugenio "g7" Paolantonio <me@medesimo.eu>
+
+name: hybris-mobian docker-images
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      fail-fast: true
+      matrix:
+        arch: [amd64, armhf, arm64]
+        template: [build-essential, rootfs-builder, aptly-intake]
+        dist: [bullseye]
+        namespace: [hybrismobian]
+        exclude:
+          - template: aptly-intake
+            arch: arm64
+          - template: aptly-intake
+            arch: armhf
+
+    name: ${{ matrix.template }}:${{ matrix.dist }} on ${{ matrix.arch }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: QEMU set-up
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+          install: true
+
+      - name: Build
+        run: ./src/build_docker_image.sh "${{ matrix.arch }}/${{ matrix.namespace }}/${{ matrix.template }}:${{ matrix.dist }}"
+
+      - name: Deploy
+        if: "${{ github.ref == 'refs/heads/master' }}"
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: ./src/push_docker_image.sh "${{ matrix.arch }}/${{ matrix.namespace }}/${{ matrix.template }}:${{ matrix.dist }}"

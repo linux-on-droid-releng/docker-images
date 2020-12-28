@@ -39,4 +39,4 @@ case "${ARCH}" in
 		;;
 esac
 
-docker build -f "./Dockerfile.${_sanitized}" -t "${IMAGE}" --build-arg ARCH="${_DOCKER_ARCH}" .
+docker build -f "./Dockerfile.${_sanitized}" --tag "${IMAGE}" --build-arg ARCH="${_DOCKER_ARCH}" --output type=docker .
