@@ -29,6 +29,7 @@ RUN apt-get update && apt-get install -y \
  dosfstools \
  udev \
  bmap-tools \
+ rsync \
  systemd-container
 
 # Systemd configuration:
