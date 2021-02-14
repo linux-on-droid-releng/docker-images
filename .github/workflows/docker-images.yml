@@ -4,6 +4,8 @@
 name: hybris-mobian docker-images
 
 on:
+  schedule:
+    - cron: "59 23 * * *"
   push:
 
 jobs:
