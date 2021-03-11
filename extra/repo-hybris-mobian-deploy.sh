@@ -37,11 +37,11 @@ ssh-add <(echo "${INTAKE_SSH_KEY}")
 # Push fingerprint (this must be changed manually)
 cat > ~/.ssh/known_hosts <<EOF
 # repo.hybris-mobian.org:22 SSH-2.0-OpenSSH_7.9p1 Debian-10+deb10u2
-repo.hybris-mobian.org ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDRI1DlHPFiRCrQCLXGRN7nuIBN9Wzp4/ugfpd915icurvaahGYXN3WbfFDMIQLfMal3grqxGaJpzLGaLC1th9Pkz3sdeeGAjdcR+kvm1lwgkIbu80MXj7bb4QB0vqTn2IhKviw4f+l+Y0jKH1A0Y8bnwyzIeMcVXbhK9QYvbux+QTGqCbPmEPs0ednfyfHDQ/bodlL8w2CG72WLXbCetS8eO1rtg0m2WKWmUxKkAx6TD9ZSEHBrgAimwQ2KZQfUeo2rx+DKogFpQq1LC65flWYY2jasOr6x9hwn1OpwAg1Et7IceOOATUrMQ7WXuegnntVWD0F6rtFziBxuwNB0LoR
+repo.hybris-mobian.org ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCm8IY+RFwQNIKlQDr2vRBg9zxOzGrSFiHHekwd3zdgW3k3UgW016ArFJgeS8pQ//WqJoxMnQLh42CoWqmrVSbwxyUBAPLagulIpB5vuYDSVMm8O1MWkS7+oZHD5nujQAy4zIxnN7cMSrseUzbt/vyV0dHW+WBxlPnODMDOze/vmhVUDxvsUFi+DzCn9HvSSuViLW3dEKE8po5UP2Ttalq94luru5ZxpfAeCfJ9m4dVw+VRB66c74qtKFR7UfAQVUnOLzIlUtKnG9wrZEYilCFuPFrZVFQ92sSWdPrMjWYaeC+RzwKAscgAjTQhjUeTlb+YaAO8l94zAtE5RjjOdH1t
 # repo.hybris-mobian.org:22 SSH-2.0-OpenSSH_7.9p1 Debian-10+deb10u2
-repo.hybris-mobian.org ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDJZLUaeRRuUPXGgsl95wnXQbS/U60yy6/25flr9tyR0mMHjDaImAOGCoHxfLYzS9gs6uueJTm2RSvMRGNniVko=
+repo.hybris-mobian.org ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBv8R4sZtZlwV+SPHn6hQklcWAKxQu55ESjGxSmLTqqe2DSSF6zP8x0n6dd6RyA20t6Ia8s8A/gH4W7vcpKkpDs=
 # repo.hybris-mobian.org:22 SSH-2.0-OpenSSH_7.9p1 Debian-10+deb10u2
-repo.hybris-mobian.org ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC8mPJgrtCjshSoo0XOwbrbLrn08nOme7tdQ3rcvwNYD
+repo.hybris-mobian.org ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPqtpEaUXN6HAi+FSbIWSywaPwTfgcXnDA4AKpNV+H+t
 EOF
 
 # Determine target.
