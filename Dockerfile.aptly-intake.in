@@ -9,6 +9,17 @@ ENV DEBIAN_PRIORITY critical
 # Required for https repositories
 RUN apt-get update && apt-get install --yes ca-certificates
 
+# Copy relevant repositories and keyrings
+# Note: .dummy files used to keep the directory hierarchy in git are
+# copied too, see moby/moby#26332
+COPY repositories/all/* /etc/apt/sources.list.d/
+COPY repositories/%(arch)s/* /etc/apt/sources.list.d/
+
+COPY keyrings/all/* /etc/apt/hybris-mobian-gpg.d/
+COPY keyrings/%(arch)s/* /etc/apt/hybris-mobian-gpg.d/
+
+COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
+
 # Pre-create users and groups. We are going to remap them anyway
 # at runtime by looking at permissions of the bind-mounted directories
 # but at least we already know which ids to change
