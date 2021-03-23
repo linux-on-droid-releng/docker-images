@@ -1,7 +1,7 @@
-# hybris-mobian docker images build definition for GitHub Actions
+# droidian docker images build definition for GitHub Actions
 # Contact: Eugenio "g7" Paolantonio <me@medesimo.eu>
 
-name: hybris-mobian docker-images
+name: droidian docker-images
 
 on:
   schedule:
@@ -18,7 +18,7 @@ jobs:
         arch: [amd64, armhf, arm64]
         template: [build-essential, rootfs-builder, aptly-intake]
         dist: [bullseye]
-        namespace: [hybrismobian]
+        namespace: [droidian]
         exclude:
           - template: aptly-intake
             arch: arm64

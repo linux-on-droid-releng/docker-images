@@ -13,10 +13,10 @@ RUN apt-get update && apt-get install --yes ca-certificates
 # Note: .dummy files used to keep the directory hierarchy in git are
 # copied too, see moby/moby#26332
 COPY repositories/all/* /etc/apt/sources.list.d/
-COPY repositories/arm64/* /etc/apt/sources.list.d/
+COPY repositories/armhf/* /etc/apt/sources.list.d/
 
-COPY keyrings/all/* /etc/apt/hybris-mobian-gpg.d/
-COPY keyrings/arm64/* /etc/apt/hybris-mobian-gpg.d/
+COPY keyrings/all/* /etc/apt/droidian-gpg.d/
+COPY keyrings/armhf/* /etc/apt/droidian-gpg.d/
 
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 

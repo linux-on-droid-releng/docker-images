@@ -15,8 +15,8 @@ RUN apt-get update && apt-get install --yes ca-certificates
 COPY repositories/all/* /etc/apt/sources.list.d/
 COPY repositories/%(arch)s/* /etc/apt/sources.list.d/
 
-COPY keyrings/all/* /etc/apt/hybris-mobian-gpg.d/
-COPY keyrings/%(arch)s/* /etc/apt/hybris-mobian-gpg.d/
+COPY keyrings/all/* /etc/apt/droidian-gpg.d/
+COPY keyrings/%(arch)s/* /etc/apt/droidian-gpg.d/
 
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 
