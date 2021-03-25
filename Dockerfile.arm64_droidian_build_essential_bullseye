@@ -36,5 +36,5 @@ RUN apt-get update && apt-get install -y \
  openssh-client \
  rsync \
  releng-tools \
- hybris-mobian-apt-config \
- hybris-mobian-archive-keyring && apt-get dist-upgrade -y --allow-downgrades
+ droidian-apt-config \
+ droidian-archive-keyring && apt-get dist-upgrade -y --allow-downgrades
