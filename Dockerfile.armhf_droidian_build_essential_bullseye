@@ -28,7 +28,7 @@ COPY extra/repo-droidian-sign.sh /usr/local/bin
 RUN dpkg --add-architecture arm64 && dpkg --add-architecture armhf
 
 # Update and install
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --allow-downgrades \
  build-essential \
  devscripts \
  equivs \
