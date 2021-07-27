@@ -16,7 +16,7 @@ jobs:
       fail-fast: true
       matrix:
         arch: [amd64, armhf, arm64]
-        template: [build-essential, rootfs-builder, aptly-intake]
+        template: [build-essential, build-essential-pm, rootfs-builder, aptly-intake]
         dist: [bullseye]
         namespace: [droidian]
         exclude:
