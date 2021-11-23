@@ -36,12 +36,12 @@ ssh-add <(echo "${INTAKE_SSH_KEY}")
 
 # Push fingerprint (this must be changed manually)
 cat > ~/.ssh/known_hosts <<EOF
-# repo.hybris-mobian.org:22 SSH-2.0-OpenSSH_7.9p1 Debian-10+deb10u2
-repo.hybris-mobian.org ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCm8IY+RFwQNIKlQDr2vRBg9zxOzGrSFiHHekwd3zdgW3k3UgW016ArFJgeS8pQ//WqJoxMnQLh42CoWqmrVSbwxyUBAPLagulIpB5vuYDSVMm8O1MWkS7+oZHD5nujQAy4zIxnN7cMSrseUzbt/vyV0dHW+WBxlPnODMDOze/vmhVUDxvsUFi+DzCn9HvSSuViLW3dEKE8po5UP2Ttalq94luru5ZxpfAeCfJ9m4dVw+VRB66c74qtKFR7UfAQVUnOLzIlUtKnG9wrZEYilCFuPFrZVFQ92sSWdPrMjWYaeC+RzwKAscgAjTQhjUeTlb+YaAO8l94zAtE5RjjOdH1t
-# repo.hybris-mobian.org:22 SSH-2.0-OpenSSH_7.9p1 Debian-10+deb10u2
-repo.hybris-mobian.org ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBv8R4sZtZlwV+SPHn6hQklcWAKxQu55ESjGxSmLTqqe2DSSF6zP8x0n6dd6RyA20t6Ia8s8A/gH4W7vcpKkpDs=
-# repo.hybris-mobian.org:22 SSH-2.0-OpenSSH_7.9p1 Debian-10+deb10u2
-repo.hybris-mobian.org ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPqtpEaUXN6HAi+FSbIWSywaPwTfgcXnDA4AKpNV+H+t
+# repo.droidian.org:22 SSH-2.0-OpenSSH_7.9p1 Debian-10+deb10u2
+repo.droidian.org ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCm8IY+RFwQNIKlQDr2vRBg9zxOzGrSFiHHekwd3zdgW3k3UgW016ArFJgeS8pQ//WqJoxMnQLh42CoWqmrVSbwxyUBAPLagulIpB5vuYDSVMm8O1MWkS7+oZHD5nujQAy4zIxnN7cMSrseUzbt/vyV0dHW+WBxlPnODMDOze/vmhVUDxvsUFi+DzCn9HvSSuViLW3dEKE8po5UP2Ttalq94luru5ZxpfAeCfJ9m4dVw+VRB66c74qtKFR7UfAQVUnOLzIlUtKnG9wrZEYilCFuPFrZVFQ92sSWdPrMjWYaeC+RzwKAscgAjTQhjUeTlb+YaAO8l94zAtE5RjjOdH1t
+# repo.droidian.org:22 SSH-2.0-OpenSSH_7.9p1 Debian-10+deb10u2
+repo.droidian.org ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBv8R4sZtZlwV+SPHn6hQklcWAKxQu55ESjGxSmLTqqe2DSSF6zP8x0n6dd6RyA20t6Ia8s8A/gH4W7vcpKkpDs=
+# repo.droidian.org:22 SSH-2.0-OpenSSH_7.9p1 Debian-10+deb10u2
+repo.droidian.org ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPqtpEaUXN6HAi+FSbIWSywaPwTfgcXnDA4AKpNV+H+t
 EOF
 
 # Determine target.
@@ -71,7 +71,7 @@ find /tmp/buildd-results/ \
 	-regextype posix-egrep \
 	-regex "/tmp/buildd-results/.*\.(u?deb|tar\..*|dsc|buildinfo)$" \
 	-print0 \
-	| xargs -0 -i rsync --perms --chmod=D770,F770 --progress {} ${INTAKE_SSH_USER}@repo.hybris-mobian.org:./${TARGET}/
+	| xargs -0 -i rsync --perms --chmod=D770,F770 --progress {} ${INTAKE_SSH_USER}@repo.droidian.org:./${TARGET}/
 
 echo "Uploading .changes"
 find /tmp/buildd-results/ \
@@ -79,4 +79,4 @@ find /tmp/buildd-results/ \
 	-regextype posix-egrep \
 	-regex "/tmp/buildd-results/.*\.changes$" \
 	-print0 \
-	| xargs -0 -i rsync --perms --chmod=D770,F770 --progress {} ${INTAKE_SSH_USER}@repo.hybris-mobian.org:./${TARGET}/
+	| xargs -0 -i rsync --perms --chmod=D770,F770 --progress {} ${INTAKE_SSH_USER}@repo.droidian.org:./${TARGET}/
