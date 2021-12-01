@@ -1,0 +1,7 @@
+Package: *
+Pin: release o=Debian
+Pin-Priority: 1005
+
+Package: libc-bin libc-dev-bin libc6 libc6-dev
+Pin: release o=hybris-mobian
+Pin-Priority: 1006

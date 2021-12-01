@@ -12,8 +12,11 @@ RUN apt-get update && apt-get install --yes ca-certificates
 # Copy relevant repositories and keyrings
 # Note: .dummy files used to keep the directory hierarchy in git are
 # copied too, see moby/moby#26332
-COPY repositories/all/* /etc/apt/sources.list.d/
-COPY repositories/%(arch)s/* /etc/apt/sources.list.d/
+COPY repositories/%(tag)s/all/* /etc/apt/sources.list.d/
+COPY repositories/%(tag)s/%(arch)s/* /etc/apt/sources.list.d/
+
+# Copy apt preferences
+COPY preferences/%(tag)s/* /etc/apt/preferences.d/
 
 COPY keyrings/all/* /etc/apt/droidian-gpg.d/
 COPY keyrings/%(arch)s/* /etc/apt/droidian-gpg.d/
