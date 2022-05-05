@@ -38,6 +38,10 @@ RUN apt-get update && apt-get install -y \
  bmap-tools \
  rsync \
  zip \
+ lvm2 \
+ qemu-user-static \
+ binfmt-support \
+ android-sdk-libsparse-utils \
  systemd-container
 
 # Systemd configuration:
