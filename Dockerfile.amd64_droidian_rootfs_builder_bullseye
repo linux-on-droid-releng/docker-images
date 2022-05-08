@@ -42,6 +42,7 @@ RUN apt-get update && apt-get install -y \
  qemu-user-static \
  binfmt-support \
  android-sdk-libsparse-utils \
+ python3-yaml \
  systemd-container
 
 # Systemd configuration:
