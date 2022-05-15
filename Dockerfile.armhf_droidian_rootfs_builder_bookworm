@@ -45,6 +45,13 @@ RUN apt-get update && apt-get install -y \
  python3-yaml \
  systemd-container
 
+# Workaround binfmt bug on latest qemu
+RUN \
+ for x in /usr/lib/binfmt.d/qemu-*; do \
+     /bin/bash -c "[[ ${x} == *.conf ]]" || mv ${x} ${x}.conf; \
+ done; \
+ update-binfmts --enable
+
 # Systemd configuration:
 # Credits to Alexander Haase <ahaase@alexhaase.de>
 #
