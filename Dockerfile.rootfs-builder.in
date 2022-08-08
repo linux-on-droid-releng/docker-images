@@ -30,6 +30,8 @@ RUN apt-get update && apt-get install -y \
  mobian-archive-keyring && \
  rm -f /etc/apt/sources.list.d/hybris-mobian.list /etc/apt/sources.list.d/mobian.list && \
  apt-get install -y \
+ init \
+ systemd-sysv \
  debos \
  dpkg-dev \
  parted \
