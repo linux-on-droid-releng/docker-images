@@ -1,0 +1,1 @@
+deb [signed-by=/etc/apt/droidian-gpg.d/hybris-mobian.asc] http://droidian-releng-glibc-workaround-time64.repo.droidian.org/bookworm-ci-armhf-workaround-2-34/ bookworm main
