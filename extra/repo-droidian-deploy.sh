@@ -21,6 +21,15 @@ elif [ "${DRONE}" == "true" ]; then
 	if [ -n "${DRONE_TAG}" ]; then
 		TAG="${DRONE_TAG}"
 	fi
+elif [ "${CIRCLECI}" == "true" ]; then
+	# CircleCI
+
+	BRANCH="${CIRCLE_BRANCH}"
+	COMMIT="${CIRCLE_SHA1}"
+	PROJECT_SLUG="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
+	if [ -n "${CIRCLE_TAG}" ]; then
+		TAG="${CIRCLE_TAG}"
+	fi
 else
 	# Sorry
 	echo "This script runs only on Travis CI or Drone CI!"
