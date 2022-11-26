@@ -6,8 +6,8 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NOWARNINGS yes
 ENV DEBIAN_PRIORITY critical
 
-# Required for https repositories
-RUN apt-get update && apt-get install --yes ca-certificates
+# Required for https repositories and to properly add users
+RUN apt-get update && apt-get install --yes ca-certificates adduser
 
 # Copy relevant repositories and keyrings
 # Note: .dummy files used to keep the directory hierarchy in git are
