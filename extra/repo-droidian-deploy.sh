@@ -41,7 +41,7 @@ echo "Loading SSH key"
 mkdir -p ~/.ssh
 
 eval $(ssh-agent -s)
-ssh-add <(echo "${INTAKE_SSH_KEY}")
+ssh-add <(echo "${INTAKE_SSH_KEY}") &> /dev/null
 
 # Push fingerprint (this must be changed manually)
 cat > ~/.ssh/known_hosts <<EOF
