@@ -34,6 +34,8 @@ RUN dpkg --add-architecture arm64 && dpkg --add-architecture armhf && dpkg --add
 RUN apt-get update && apt-get install -y --allow-downgrades \
  build-essential \
  libncurses-dev \
+ bash-completion \
+ nano \
  devscripts \
  equivs \
  wget \
