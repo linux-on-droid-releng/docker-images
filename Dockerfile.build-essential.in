@@ -41,6 +41,8 @@ RUN apt-get update && apt-get install -y --allow-downgrades \
  wget \
  openssh-client \
  rsync \
+ mkbootimg \
+ mkdtboimg \
  releng-tools \
  droidian-apt-config \
  droidian-archive-keyring \
