@@ -1,0 +1,34 @@
+ARG ARCH=
+FROM scratch
+ADD base-amd64-current.tar /
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NOWARNINGS yes
+ENV DEBIAN_PRIORITY critical
+
+# Copy relevant repositories and keyrings
+# Note: .dummy files used to keep the directory hierarchy in git are
+# copied too, see moby/moby#26332
+COPY repositories/current/all/* /etc/apt/sources.list.d/
+COPY repositories/current/amd64/* /etc/apt/sources.list.d/
+
+# Copy apt preferences
+COPY preferences/current/* /etc/apt/preferences.d/
+
+COPY keyrings/all/* /etc/apt/droidian-gpg.d/
+COPY keyrings/amd64/* /etc/apt/droidian-gpg.d/
+
+COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
+
+# Special handling for i386 packages
+RUN \
+	if [ "amd64" = "amd64" ]; then \
+		ln -s /usr/share/droidian-release/buildd_support.list /etc/apt/sources.list.d/buildd_support.list; \
+		dpkg --add-architecture i386; \
+	fi
+
+# Add secondary architectures
+RUN \
+	dpkg --add-architecture arm64 && \
+	dpkg --add-architecture armhf && \
+	apt-get update
