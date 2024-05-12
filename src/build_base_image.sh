@@ -38,7 +38,7 @@ ${tmpdir}/debootstrap/debootstrap \
 	--arch="${ARCH}" \
 	--components=main \
 	--variant=minbase \
-	--include=droidian-archive-keyring,ca-certificates,droidian-release-snapshot-control \
+	--include=droidian-archive-keyring,ca-certificates,droidian-release-snapshot-control,adduser \
 	--keyring=keyrings/all/droidian.gpg \
 	rolling \
 	base-${ARCH}-${FLAVOUR} \
