@@ -10,14 +10,14 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     strategy:
       fail-fast: true
       matrix:
         arch: [amd64, armhf, arm64]
         template: [build-essential, rootfs-builder, aptly-intake]
-        dist: [bookworm, trixie]
+        dist: [next]
         namespace: [droidian]
         exclude:
           - template: aptly-intake

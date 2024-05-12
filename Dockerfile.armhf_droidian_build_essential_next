@@ -1,18 +1,18 @@
-# Pull latest Droidian base image for flavour %(tag)s
+# Pull latest Droidian base image for flavour next
 ARG ARCH=
-FROM quay.io/droidian/base:%(tag)s-%(arch)s
+FROM quay.io/droidian/base:next-armhf
 
 # Copy relevant repositories and keyrings
 # Note: .dummy files used to keep the directory hierarchy in git are
 # copied too, see moby/moby#26332
-COPY repositories/%(tag)s/all/* /etc/apt/sources.list.d/
-COPY repositories/%(tag)s/%(arch)s/* /etc/apt/sources.list.d/
+COPY repositories/next/all/* /etc/apt/sources.list.d/
+COPY repositories/next/armhf/* /etc/apt/sources.list.d/
 
 # Copy apt preferences
-COPY preferences/%(tag)s/* /etc/apt/preferences.d/
+COPY preferences/next/* /etc/apt/preferences.d/
 
 COPY keyrings/all/* /etc/apt/droidian-gpg.d/
-COPY keyrings/%(arch)s/* /etc/apt/droidian-gpg.d/
+COPY keyrings/armhf/* /etc/apt/droidian-gpg.d/
 
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 
@@ -49,6 +49,6 @@ RUN apt-get install -y libc6:i386
 # Patch dpkg-perl's Patch.pm to avoid overzealous checks
 RUN \
 	sed -i \
-		"s|error(g_('diff %%s modifies file %%s through a symlink: %%s')|warning(g_('diff %%s modifies file %%s through a symlink: %%s')|" \
+		"s|error(g_('diff %s modifies file %s through a symlink: %s')|warning(g_('diff %s modifies file %s through a symlink: %s')|" \
 		/usr/share/perl5/Dpkg/Source/Patch.pm && \
 	echo "libdpkg-perl hold" | dpkg --set-selections

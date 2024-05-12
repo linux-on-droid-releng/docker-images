@@ -1,13 +1,6 @@
-# Pull latest Debian %(tag)s
+# Pull latest Droidian base image for flavour %(tag)s
 ARG ARCH=
-FROM ${ARCH}/debian:%(tag)s
-
-ENV DEBIAN_FRONTEND noninteractive
-ENV DEBCONF_NOWARNINGS yes
-ENV DEBIAN_PRIORITY critical
-
-# Required for https repositories
-RUN apt-get update && apt-get install --yes ca-certificates
+FROM quay.io/droidian/base:%(tag)s-%(arch)s
 
 # Copy relevant repositories and keyrings
 # Note: .dummy files used to keep the directory hierarchy in git are

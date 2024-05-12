@@ -1,18 +1,18 @@
-# Pull latest Droidian base image for flavour %(tag)s
+# Pull latest Droidian base image for flavour next
 ARG ARCH=
-FROM quay.io/droidian/base:%(tag)s-%(arch)s
+FROM quay.io/droidian/base:next-amd64
 
 # Copy relevant repositories and keyrings
 # Note: .dummy files used to keep the directory hierarchy in git are
 # copied too, see moby/moby#26332
-COPY repositories/%(tag)s/all/* /etc/apt/sources.list.d/
-COPY repositories/%(tag)s/%(arch)s/* /etc/apt/sources.list.d/
+COPY repositories/next/all/* /etc/apt/sources.list.d/
+COPY repositories/next/amd64/* /etc/apt/sources.list.d/
 
 # Copy apt preferences
-COPY preferences/%(tag)s/* /etc/apt/preferences.d/
+COPY preferences/next/* /etc/apt/preferences.d/
 
 COPY keyrings/all/* /etc/apt/droidian-gpg.d/
-COPY keyrings/%(arch)s/* /etc/apt/droidian-gpg.d/
+COPY keyrings/amd64/* /etc/apt/droidian-gpg.d/
 
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 

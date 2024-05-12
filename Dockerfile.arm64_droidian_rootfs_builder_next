@@ -1,43 +1,52 @@
-# Pull latest Droidian base image for flavour %(tag)s
+# Pull latest Droidian base image for flavour next
 ARG ARCH=
-FROM quay.io/droidian/base:%(tag)s-%(arch)s
+FROM quay.io/droidian/base:next-arm64
 
 # Copy relevant repositories and keyrings
 # Note: .dummy files used to keep the directory hierarchy in git are
 # copied too, see moby/moby#26332
-COPY repositories/%(tag)s/all/* /etc/apt/sources.list.d/
-COPY repositories/%(tag)s/%(arch)s/* /etc/apt/sources.list.d/
+COPY repositories/next/all/* /etc/apt/sources.list.d/
+COPY repositories/next/arm64/* /etc/apt/sources.list.d/
 
 # Copy apt preferences
-COPY preferences/%(tag)s/* /etc/apt/preferences.d/
+COPY preferences/next/* /etc/apt/preferences.d/
 
 COPY keyrings/all/* /etc/apt/droidian-gpg.d/
-COPY keyrings/%(arch)s/* /etc/apt/droidian-gpg.d/
+COPY keyrings/arm64/* /etc/apt/droidian-gpg.d/
 
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 
-# Pre-create users and groups. We are going to remap them anyway
-# at runtime by looking at permissions of the bind-mounted directories
-# but at least we already know which ids to change
-RUN adduser --system --home /var/lib/aptly-api --no-create-home --uid 10100 aptly-api && \
- addgroup --gid 10100 aptly-api && \
- adduser aptly-api aptly-api && \
- adduser --system --home /srv/aptly-queue --no-create-home --uid 10101 aptly-queue && \
- addgroup --gid 10101 aptly-queue && \
- adduser aptly-queue aptly-queue && \
- adduser aptly-api aptly-queue
-
 # Update and install
 RUN apt-get update && apt-get install -y \
- systemd \
+ droidian-apt-config \
+ droidian-archive-keyring \
+ mobian-archive-keyring && \
+ rm -f /etc/apt/sources.list.d/hybris-mobian.list /etc/apt/sources.list.d/mobian.list && \
+ apt-get update && \
+ apt-get install -y \
+ init \
  systemd-sysv \
- aptly \
- aptly-api \
- python3 \
- python3-requests \
- python3-debian \
- wget \
- aptly-intake
+ debos \
+ dpkg-dev \
+ parted \
+ dosfstools \
+ udev \
+ bmap-tools \
+ rsync \
+ zip \
+ lvm2 \
+ qemu-user-static \
+ binfmt-support \
+ android-sdk-libsparse-utils \
+ python3-yaml \
+ systemd-container
+
+# Workaround binfmt bug on latest qemu
+RUN \
+ for x in /usr/lib/binfmt.d/qemu-*; do \
+     /bin/bash -c "[[ ${x} == *.conf ]]" || mv ${x} ${x}.conf; \
+ done; \
+ update-binfmts --enable
 
 # Systemd configuration:
 # Credits to Alexander Haase <ahaase@alexhaase.de>
