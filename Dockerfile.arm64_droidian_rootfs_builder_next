@@ -33,6 +33,7 @@ RUN \
  lvm2 \
  qemu-user-static \
  binfmt-support \
+ android-sdk-libsparse-utils \
  python3-yaml \
  systemd-container
 
