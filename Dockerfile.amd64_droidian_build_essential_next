@@ -36,11 +36,7 @@ RUN apt-get update && apt-get install -y --allow-downgrades \
  rsync \
  mkbootimg \
  mkdtboimg \
- releng-tools \
- droidian-apt-config \
- droidian-archive-keyring \
- mobian-archive-keyring && \
- rm -f /etc/apt/sources.list.d/hybris-mobian.list /etc/apt/sources.list.d/mobian.list && \
+ releng-tools && \
  apt-get dist-upgrade -y --allow-downgrades
 
 # FIXME: install libc6:i386

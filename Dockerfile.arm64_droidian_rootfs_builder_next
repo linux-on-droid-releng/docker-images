@@ -17,11 +17,7 @@ COPY keyrings/arm64/* /etc/apt/droidian-gpg.d/
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 
 # Update and install
-RUN apt-get update && apt-get install -y \
- droidian-apt-config \
- droidian-archive-keyring \
- mobian-archive-keyring && \
- rm -f /etc/apt/sources.list.d/hybris-mobian.list /etc/apt/sources.list.d/mobian.list && \
+RUN \
  apt-get update && \
  apt-get install -y \
  init \
@@ -37,7 +33,6 @@ RUN apt-get update && apt-get install -y \
  lvm2 \
  qemu-user-static \
  binfmt-support \
- android-sdk-libsparse-utils \
  python3-yaml \
  systemd-container
 
