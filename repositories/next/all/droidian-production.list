@@ -1,0 +1,4 @@
+# This is the Droidian repository. It sits on top of the snapshot, and is used
+# for development (as such, it's available only on the "next" flavour)
+
+deb https://production.repo.droidian.org/ trixie main
