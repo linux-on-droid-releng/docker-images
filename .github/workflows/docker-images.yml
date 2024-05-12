@@ -17,7 +17,7 @@ jobs:
       matrix:
         arch: [amd64, armhf, arm64]
         template: [build-essential, rootfs-builder, aptly-intake]
-        dist: [next]
+        dist: [current, next]
         namespace: [droidian]
         exclude:
           - template: aptly-intake

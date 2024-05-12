@@ -1,0 +1,53 @@
+# Pull latest Droidian base image for flavour current
+ARG ARCH=
+FROM quay.io/droidian/base:current-armhf
+
+# Copy relevant repositories and keyrings
+# Note: .dummy files used to keep the directory hierarchy in git are
+# copied too, see moby/moby#26332
+COPY repositories/current/all/* /etc/apt/sources.list.d/
+COPY repositories/current/armhf/* /etc/apt/sources.list.d/
+
+# Copy apt preferences
+COPY preferences/current/* /etc/apt/preferences.d/
+
+COPY keyrings/all/* /etc/apt/droidian-gpg.d/
+COPY keyrings/armhf/* /etc/apt/droidian-gpg.d/
+
+COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
+
+# Copy deployer for repo.droidian.org
+COPY extra/repo-droidian-deploy.sh /usr/local/bin
+COPY extra/repo-droidian-sign.sh /usr/local/bin
+
+# Add secondary architectures
+RUN dpkg --add-architecture arm64 && dpkg --add-architecture armhf && dpkg --add-architecture i386
+
+# Update and install
+RUN apt-get update && apt-get install -y --allow-downgrades \
+ build-essential \
+ libncurses-dev \
+ bash-completion \
+ nano \
+ devscripts \
+ equivs \
+ wget \
+ openssh-client \
+ rsync \
+ mkbootimg \
+ mkdtboimg \
+ releng-tools && \
+ apt-get dist-upgrade -y --allow-downgrades
+
+# FIXME: install libc6:i386
+RUN \
+	if [ "armhf" = "amd64" ]; then \
+		apt-get install -y libc6:i386; \
+	fi
+
+# Patch dpkg-perl's Patch.pm to avoid overzealous checks
+RUN \
+	sed -i \
+		"s|error(g_('diff %s modifies file %s through a symlink: %s')|warning(g_('diff %s modifies file %s through a symlink: %s')|" \
+		/usr/share/perl5/Dpkg/Source/Patch.pm && \
+	echo "libdpkg-perl hold" | dpkg --set-selections
