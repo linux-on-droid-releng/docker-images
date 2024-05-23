@@ -22,8 +22,8 @@ info "Pushing ${IMAGE}"
 
 # Extract arch
 ARCH=$(echo "${IMAGE}" | cut -d"/" -f1)
-TARGET_TAG=quay.io/${IMAGE/"${ARCH}/"/""}-"${ARCH}"
+TARGET_TAG=registry.lindroid.org/${IMAGE/"${ARCH}/"/""}-"${ARCH}"
 
-echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin quay.io
+echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin registry.lindroid.org
 docker tag "${IMAGE}" "${TARGET_TAG}"
 docker push "${TARGET_TAG}"
