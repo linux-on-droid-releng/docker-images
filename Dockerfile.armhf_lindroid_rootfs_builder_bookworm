@@ -39,7 +39,7 @@ RUN apt-get update && apt-get install -y \
  dosfstools \
  udev \
  bmap-tools \
- rsync \
+ curl \
  zip \
  lvm2 \
  qemu-user-static \

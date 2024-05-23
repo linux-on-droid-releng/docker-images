@@ -30,6 +30,6 @@ RUN apt-get update && apt-get install -y --allow-downgrades \
  equivs \
  wget \
  openssh-client \
- rsync \
+ curl \
  releng-tools && \
  apt-get dist-upgrade -y --allow-downgrades
