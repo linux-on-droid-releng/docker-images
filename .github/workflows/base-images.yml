@@ -1,7 +1,7 @@
-# droidian docker images build definition for GitHub Actions
-# Contact: Eugenio "g7" Paolantonio <me@medesimo.eu>
+# lindroid docker images build definition for GitHub Actions
+# Contact: Luka Panio <lukapanio@gmail.com>
 
-name: droidian base images
+name: lindroid base images
 
 on:
   schedule:
@@ -18,7 +18,7 @@ jobs:
         arch: [amd64, armhf, arm64]
         template: [base]
         dist: [current, next]
-        namespace: [droidian]
+        namespace: [lindroid]
 
     name: ${{ matrix.template }}:${{ matrix.dist }} on ${{ matrix.arch }}
 
