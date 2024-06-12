@@ -1,0 +1,3 @@
+# This is the Lindroid repository.
+
+deb [trusted=yes] https://repo.lindroid.org/repository/lindroid trixie main

@@ -1,6 +1,6 @@
-# Pull latest Droidian base image for flavour next
+# Pull latest Lindroid base image for flavour next
 ARG ARCH=
-FROM quay.io/droidian/base:next-amd64
+FROM registry.lindroid.org/lindroid/base:next-amd64
 
 # Copy relevant repositories and keyrings
 # Note: .dummy files used to keep the directory hierarchy in git are
@@ -11,8 +11,8 @@ COPY repositories/next/amd64/* /etc/apt/sources.list.d/
 # Copy apt preferences
 COPY preferences/next/* /etc/apt/preferences.d/
 
-COPY keyrings/all/* /etc/apt/droidian-gpg.d/
-COPY keyrings/amd64/* /etc/apt/droidian-gpg.d/
+COPY keyrings/all/* /etc/apt/lindroid-gpg.d/
+COPY keyrings/amd64/* /etc/apt/lindroid-gpg.d/
 
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 
@@ -28,7 +28,7 @@ RUN adduser --system --home /var/lib/aptly-api --no-create-home --uid 10100 aptl
  adduser aptly-api aptly-queue
 
 # Update and install
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get upgrade -y --allow-downgrades && apt-get install -y \
  systemd \
  systemd-sysv \
  aptly \

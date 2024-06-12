@@ -1,6 +1,6 @@
-# Pull latest Droidian base image for flavour %(tag)s
+# Pull latest Lindroid base image for flavour %(tag)s
 ARG ARCH=
-FROM quay.io/droidian/base:%(tag)s-%(arch)s
+FROM registry.lindroid.org/lindroid/base:%(tag)s-%(arch)s
 
 # Copy relevant repositories and keyrings
 # Note: .dummy files used to keep the directory hierarchy in git are
@@ -11,14 +11,14 @@ COPY repositories/%(tag)s/%(arch)s/* /etc/apt/sources.list.d/
 # Copy apt preferences
 COPY preferences/%(tag)s/* /etc/apt/preferences.d/
 
-COPY keyrings/all/* /etc/apt/droidian-gpg.d/
-COPY keyrings/%(arch)s/* /etc/apt/droidian-gpg.d/
+COPY keyrings/all/* /etc/apt/lindroid-gpg.d/
+COPY keyrings/%(arch)s/* /etc/apt/lindroid-gpg.d/
 
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 
-# Copy deployer for repo.droidian.org
-COPY extra/repo-droidian-deploy.sh /usr/local/bin
-COPY extra/repo-droidian-sign.sh /usr/local/bin
+# Copy deployer for repo.lindroid.org
+COPY extra/repo-lindroid-deploy.sh /usr/local/bin
+COPY extra/repo-lindroid-sign.sh /usr/local/bin
 
 # Add secondary architectures
 RUN dpkg --add-architecture arm64 && dpkg --add-architecture armhf && dpkg --add-architecture i386

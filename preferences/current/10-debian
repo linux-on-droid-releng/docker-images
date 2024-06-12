@@ -1,5 +1,0 @@
-# Always prefer packages coming from Droidian snapshots
-Package: *
-Pin: release o=Debian
-Pin-Priority: 100
-

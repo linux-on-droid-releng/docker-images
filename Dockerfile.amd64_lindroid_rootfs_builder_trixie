@@ -24,7 +24,7 @@ COPY keyrings/amd64/* /etc/apt/droidian-gpg.d/
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 
 # Update and install
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get upgrade -y --allow-downgrades && apt-get install -y \
  droidian-apt-config \
  droidian-archive-keyring \
  mobian-archive-keyring && \

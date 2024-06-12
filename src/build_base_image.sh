@@ -20,7 +20,7 @@ ARCH="${1}"
 FLAVOUR="${2}"
 [ -n "${FLAVOUR}" ] || error "USAGE: ${0} <arch> <flavour>"
 
-info "Building Droidian base image for ${ARCH} (flavour: ${FLAVOUR})"
+info "Building Lindroid base image for ${ARCH} (flavour: ${FLAVOUR})"
 
 tmpdir="$(mktemp -d)"
 onexit() {
@@ -34,15 +34,14 @@ cp  ${tmpdir}/debootstrap/scripts/sid ${tmpdir}/debootstrap/scripts/rolling
 mkdir -p "base-${ARCH}-${FLAVOUR}"
 DEBOOTSTRAP_DIR=${tmpdir}/debootstrap \
 ${tmpdir}/debootstrap/debootstrap \
-	--foreign \
-	--arch="${ARCH}" \
-	--components=main \
-	--variant=minbase \
-	--include=droidian-archive-keyring,ca-certificates,droidian-release-snapshot-control,adduser \
-	--keyring=keyrings/all/droidian.gpg \
-	rolling \
-	base-${ARCH}-${FLAVOUR} \
-	http://releases.droidian.org/snapshots/${FLAVOUR}
+    --foreign \
+    --arch="${ARCH}" \
+    --components=main,contrib,non-free \
+    --variant=minbase \
+    --include=ca-certificates,adduser \
+    trixie \
+    base-${ARCH}-${FLAVOUR} \
+    http://deb.debian.org/debian/
 
 case "${ARCH}" in
 	"arm64")
