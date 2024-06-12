@@ -1,5 +1,4 @@
-# Always prefer packages coming from Droidian snapshots
+# Always prefer packages coming from Lindroid snapshots
 Package: *
-Pin: release o=Debian
-Pin-Priority: 100
-
+Pin: origin repo.lindroid.org
+Pin-Priority: 1001

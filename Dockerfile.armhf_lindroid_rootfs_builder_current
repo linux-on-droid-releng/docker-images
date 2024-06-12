@@ -1,6 +1,6 @@
-# Pull latest Droidian base image for flavour current
+# Pull latest Lindroid base image for flavour current
 ARG ARCH=
-FROM quay.io/droidian/base:current-armhf
+FROM registry.lindroid.org/lindroid/base:current-armhf
 
 # Copy relevant repositories and keyrings
 # Note: .dummy files used to keep the directory hierarchy in git are
@@ -11,14 +11,15 @@ COPY repositories/current/armhf/* /etc/apt/sources.list.d/
 # Copy apt preferences
 COPY preferences/current/* /etc/apt/preferences.d/
 
-COPY keyrings/all/* /etc/apt/droidian-gpg.d/
-COPY keyrings/armhf/* /etc/apt/droidian-gpg.d/
+COPY keyrings/all/* /etc/apt/lindroid-gpg.d/
+COPY keyrings/armhf/* /etc/apt/lindroid-gpg.d/
 
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 
 # Update and install
 RUN \
  apt-get update && \
+ apt-get upgrade -y --allow-downgrades && \
  apt-get install -y \
  init \
  systemd-sysv \
@@ -35,7 +36,8 @@ RUN \
  binfmt-support \
  android-sdk-libsparse-utils \
  python3-yaml \
- systemd-container
+ systemd-container \
+ systemd
 
 # Workaround binfmt bug on latest qemu
 RUN \

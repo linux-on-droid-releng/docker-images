@@ -35,6 +35,9 @@ jobs:
         with:
           install: true
 
+      - name: Apt update
+        run: sudo apt-get update
+
       - name: Fetch dependencies
         run: sudo apt-get install --yes qemu-user-static binfmt-support
 
