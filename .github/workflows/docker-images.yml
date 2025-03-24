@@ -4,6 +4,7 @@
 name: lindroid docker-images
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "59 23 * * *"
   push:
