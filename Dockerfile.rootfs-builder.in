@@ -11,8 +11,8 @@ COPY repositories/%(tag)s/%(arch)s/* /etc/apt/sources.list.d/
 # Copy apt preferences
 COPY preferences/%(tag)s/* /etc/apt/preferences.d/
 
-COPY keyrings/all/* /etc/apt/lindroid-gpg.d/
-COPY keyrings/%(arch)s/* /etc/apt/lindroid-gpg.d/
+COPY keyrings/all/* /etc/apt/trusted.gpg.d/
+COPY keyrings/%(arch)s/* /etc/apt/trusted.gpg.d/
 
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 

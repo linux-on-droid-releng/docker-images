@@ -11,8 +11,8 @@ COPY repositories/next/arm64/* /etc/apt/sources.list.d/
 # Copy apt preferences
 COPY preferences/next/* /etc/apt/preferences.d/
 
-COPY keyrings/all/* /etc/apt/lindroid-gpg.d/
-COPY keyrings/arm64/* /etc/apt/lindroid-gpg.d/
+COPY keyrings/all/* /etc/apt/trusted.gpg.d/
+COPY keyrings/arm64/* /etc/apt/trusted.gpg.d/
 
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 
@@ -38,6 +38,7 @@ RUN \
  python3-yaml \
  systemd-container \
  systemd
+
 # Workaround binfmt bug on latest qemu
 RUN \
  for x in /usr/lib/binfmt.d/qemu-*; do \

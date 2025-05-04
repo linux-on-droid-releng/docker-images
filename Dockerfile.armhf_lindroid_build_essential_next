@@ -11,8 +11,8 @@ COPY repositories/next/armhf/* /etc/apt/sources.list.d/
 # Copy apt preferences
 COPY preferences/next/* /etc/apt/preferences.d/
 
-COPY keyrings/all/* /etc/apt/lindroid-gpg.d/
-COPY keyrings/armhf/* /etc/apt/lindroid-gpg.d/
+COPY keyrings/all/* /etc/apt/trusted.gpg.d/
+COPY keyrings/armhf/* /etc/apt/trusted.gpg.d/
 
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 

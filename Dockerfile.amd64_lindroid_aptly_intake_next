@@ -11,8 +11,8 @@ COPY repositories/next/amd64/* /etc/apt/sources.list.d/
 # Copy apt preferences
 COPY preferences/next/* /etc/apt/preferences.d/
 
-COPY keyrings/all/* /etc/apt/lindroid-gpg.d/
-COPY keyrings/amd64/* /etc/apt/lindroid-gpg.d/
+COPY keyrings/all/* /etc/apt/trusted.gpg.d/
+COPY keyrings/amd64/* /etc/apt/trusted.gpg.d/
 
 COPY common/apt.conf.d/* /etc/apt/apt.conf.d/
 
